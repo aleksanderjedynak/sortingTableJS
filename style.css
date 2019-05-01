@@ -1,0 +1,67 @@
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: sans-serif;
+}
+
+.tab{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.tab h1 {
+    text-align: center;
+}
+.containerTab{
+    margin: 0 auto;
+}
+
+table thead tr {
+  height: 30px;
+  background: #b3afc2;
+}
+
+thead {
+    width:100%;
+}
+
+thead th {
+    text-align: left;
+    padding-left: 2px;
+}
+
+/* fix for first table */
+thead th:first-child {
+    text-align: left;
+    padding-left: 2px;
+    width: 50px;
+}
+
+.asc, .desc{
+    position: relative;
+}
+
+.asc:before, .desc:before {
+   content: "";
+    position: absolute;
+	width: 0; 
+	height: 0; 
+	font-size: 0;
+    line-height: 0;
+    right: 4px;
+    border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+}
+
+.asc:before  {
+	border-bottom: 15px solid #2f2f2f; 
+}
+
+.desc:before {
+	border-top: 15px solid #2f2f2f;
+}
