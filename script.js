@@ -27,8 +27,38 @@ function getUserTable(users) {
 }
 
 function addTable(){
-    let tr = document.createElement('tr');
-    headTab.appendChild(tr).appendChild(tabName);
+        let tr = document.createElement('tr');
+        headTab.appendChild(tr).appendChild(tabName);
+        mainTab.appendChild(colTab);
+}
+
+function sortBy(event){
+    let target = event.target;
+    let index = target.cellIndex;
+    let tabRow = document.querySelectorAll('.mainTab tr');
+    let nodesArray = [].slice.call(tabRow);
+    let order = (target.className ==="" || target.className === "desc") ? "asc" : "desc";
+    nodesArray.sort(function(a, b){
+        let prev = a.children[index].textContent;
+        let next = b.children[index].textContent;
+        
+        if (index === 0) {
+            return order === "asc" ? prev - next : next - prev;
+        } else if (prev < next) {
+            return order === "asc" ? -1 : 1;
+        } else if (prev > next) {
+            return order === "asc" ? 1 : -1;
+        }else{
+            return 0;
+        }
+    })
+    nodesArray.forEach(newItem => {
+        colTab.appendChild(newItem) 
+    });
+    Object.entries(target.parentElement.children).forEach(([key, value]) => {
+        return key !== index ? value.className = "" : null;
+    });
+    target.className = order;
     mainTab.appendChild(colTab);
 }
 
@@ -36,11 +66,13 @@ function getTheadUserTable(head){
     for (const element of head) {
         const th = document.createElement('th');
         th.appendChild(document.createTextNode(element));
+        th.addEventListener("click", sortBy, false);
         tabName.appendChild(th);
     }
 }
 
 function getTbodyUserTable(elems){
+
     let tr = document.createElement('tr');
     for (const elem in elems) {
         const td = document.createElement('td');
